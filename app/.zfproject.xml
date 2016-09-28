@@ -26,6 +26,7 @@
           <dbTableFile dbTableName="Section"/>
         </dbTableDirectory>
         <modelFile modelName="SectionMapper"/>
+        <modelFile modelName="Section"/>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
