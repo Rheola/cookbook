@@ -11,6 +11,9 @@
           <actionMethod actionName="index"/>
         </controllerFile>
         <controllerFile controllerName="Error"/>
+        <controllerFile controllerName="Section">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
       <layoutsDirectory>
@@ -33,6 +36,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Error">
             <viewScriptFile forActionName="error"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Section">
+            <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
