@@ -4,17 +4,28 @@ class Application_Model_SectionMapper
 {
 
 
+    /**
+     * @var Application_Model_Section
+     */
     protected $_dbTable;
 
+    /**
+     * @param $dbTable
+     * @return Application_Model_SectionMapper
+     * @throws Exception
+     */
     public function setDbTable($dbTable)
     {
         if (is_string($dbTable)) {
             $dbTable = new $dbTable();
         }
+
         if (!$dbTable instanceof Zend_Db_Table_Abstract) {
+
             throw new Exception('Invalid table data gateway provided');
         }
         $this->_dbTable = $dbTable;
+
         return $this;
     }
 
@@ -23,18 +34,18 @@ class Application_Model_SectionMapper
         if (null === $this->_dbTable) {
             $this->setDbTable('Application_Model_Section');
         }
+
         return $this->_dbTable;
+
     }
 
     public function save(Application_Model_Section $section)
     {
         $data = [
-            'email' => $section->getEmail(),
-            'comment' => $section->getComment(),
-            'created' => date('Y-m-d H:i:s'),
+            'name' => $section->name,
         ];
 
-        if (null === ($id = $section->getId())) {
+        if (null === ($id = $section->id)) {
             unset($data['id']);
             $this->getDbTable()->insert($data);
         } else {
@@ -42,29 +53,30 @@ class Application_Model_SectionMapper
         }
     }
 
-    public function find($id, Application_Model_Guestbook $guestbook)
+    public function find($id, Application_Model_Section $section)
     {
         $result = $this->getDbTable()->find($id);
         if (0 == count($result)) {
             return;
         }
         $row = $result->current();
-        $guestbook->setId($row->id)
-            ->setEmail($row->email)
-            ->setComment($row->comment)
-            ->setCreated($row->created);
+        $section->id = $row->id;
+        $section->name = $row->name;
     }
 
     public function fetchAll()
     {
-        $resultSet = $this->getDbTable()->fetchAll();
+        $table = $this->getDbTable();
+
+        $resultSet = $table->fetchAll();
+
         $entries = [];
         foreach ($resultSet as $row) {
-            $entry = new Application_Model_Guestbook();
-            $entry->setId($row->id)
-                ->setEmail($row->email)
-                ->setComment($row->comment)
-                ->setCreated($row->created);
+
+            $entry = new Application_Model_Section();
+            $entry->id = $row->id;
+            $entry->name = $row->name;
+
             $entries[] = $entry;
         }
         return $entries;
