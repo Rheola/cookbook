@@ -8,24 +8,14 @@ class Application_Model_Section extends Zend_Db_Table_Abstract
     public $name;
     public $id;
 
-    /*   public function __construct(array $options = null)
-       {
-           if (is_array($options)) {
-               $this->setOptions($options);
-           }
-       }*/
-
-
-    public function setOptions(array $options)
+    public function __construct(array $options = null)
     {
-        $methods = get_class_methods($this);
-        foreach ($options as $key => $value) {
-            $method = 'set' . ucfirst($key);
-            if (in_array($method, $methods)) {
-                $this->$method($value);
-            }
+
+        foreach ($options as $attribute => $value) {
+            $this->$attribute = $value;
         }
-        return $this;
+
+        parent::__construct();
     }
 
 }
