@@ -1,42 +1,40 @@
 <br/><br/>
-<div id="view-content">
-	<p>View script for controller <b>Section</b> and script/action name <b>index</b></p>
-</div>
 
-<p><a href="<?php echo $this->url(
-		[
-			'controller' => 'guestbook',
-			'action' => 'sign'
-		],
-		'default',
-		true) ?>">Sign Our Guestbook</a></p>
+<h1>Рубрики</h1>
+
+<p><a class="btn btn-success" href="<?php echo $this->url(
+        [
+            'controller' => 'section',
+            'action' => 'create'
+        ],
+        'default',
+        true) ?>">Добавить рубрику</a></p>
 
 
- <h1>Рубрики</h1>
 <?php
 if (count($this->entries) > 0) {
-	?>
-	<table class="table">
-		<thead>
-		<tr>
-			<th>ID</th>
-			<th>Название</th>
-		</tr>
-		</thead>
-		<tbody>
-		<?php
-		foreach ($this->entries as $section) {
-			?>
-			<tr>
-				<td><?php echo $this->escape($section->id) ?></td>
-				<td><?php echo $this->escape($section->name) ?></td>
-			</tr>
-			<?
+    ?>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Название</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        foreach ($this->entries as $section) {
+            ?>
+            <tr>
+                <td><?php echo $this->escape($section->id) ?></td>
+                <td><?php echo $this->escape($section->name) ?></td>
+            </tr>
+            <?
 
-		}
-		?>
-		</tbody>
-	</table>
-	<?
+        }
+        ?>
+        </tbody>
+    </table>
+    <?
 }
 ?>
